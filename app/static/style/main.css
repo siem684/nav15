@@ -1,0 +1,22 @@
+html{
+    height:100%;
+  }
+  body
+  { height:100%;
+    background-color: #efede3;
+    overflow: hidden;
+  }
+  .center
+  {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    border: 1px;
+    border-color: blueviolet;
+    border-style: none;
+  }
