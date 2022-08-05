@@ -1,19 +1,29 @@
 
 <img width="350px" src="./logo.png" alt="" class="centerhorizontal">
 
-<p class="centerhorizontal red">{Math.round(angle)}</p>
-<p>{times}</p>
+<p class="centerhorizontal red">
+    {Math.round(angle)}
+    <br/>
+    {Math.round(dist)}
+    <br/>
+    {Math.round(speed)}
+</p>
+
+
 <div class="center" style="transform: rotate({angle}deg)">
     <img src="./icons8-gps-50.png" alt="">
 </div>
+<div id="biggerblock" class="center">
+    <img src="./compass.png" width="150px" alt="">
+</div>
 
 <script>
-    import helper, { angleJust } from "./helper.svelte"
+    import helper, { angleJust, getDistanceFromLatLonInKm } from "./helper.svelte"
     let a,times=0;
     let location ="test2";
-    let myLat = 0;
-    let myLong = 0;
-    let angle = 0;
+    let myLat, myLong, angle, dist, speed = 0;
+    let destLat = 51.9795;
+    let destLong = 5.9257;
 
     getLocation();
     setInterval(()=>getLocation(),10000);
@@ -30,7 +40,10 @@
         location = "Latitude: " + position.coords.latitude +  "<br>Longitude: " + position.coords.longitude;
         myLat=position.coords.latitude;
         myLong=position.coords.longitude;
-        angle = angleJust(myLat,myLong,51.9795,5.9257);
+        speed=position.coords.speed;
+        angle = angleJust(myLat,myLong,destLat,destLong);
+        dist = getDistanceFromLatLonInKm(myLat,myLong,destLat,destLong)*2.3
+
     }
 </script>
 
@@ -49,5 +62,11 @@
     color: red;
     text-align: center;
     font-size: 30px;
-  }
+}
+
+#biggerblock {
+    top: -20px;
+    width: 150px;
+    height: 150px;
+}
 </style>
