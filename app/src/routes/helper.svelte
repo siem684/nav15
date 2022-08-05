@@ -23,13 +23,13 @@
         lon2=toRadians(lon2);
 
         let X = Math.cos(lat2)*Math.sin(lon2-lon1);
-        alert("X is "+ X)
+        // alert("X is "+ X)
         let Y = Math.cos(lat1)*Math.sin(lat2)-Math.sin(lat1)*Math.cos(lat2)*Math.cos(lon2-lon1);
-        alert("Y is "+ Y)
+        // alert("Y is "+ Y)
         let Beta = Math.atan2(X,Y)
-        alert("Beta is " + Beta)
+        // alert("Beta is " + Beta)
         let BetaDeg = (toDegrees(Beta) + 360) % 360;
-        alert("Beta in Deg is " + BetaDeg);
+        // alert("Beta in Deg is " + BetaDeg);
     return BetaDeg;
     }
 
