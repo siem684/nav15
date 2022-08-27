@@ -1,28 +1,28 @@
 <script>
 	import helper, { angleJust, getDistanceFromLatLonInKm } from './helper.svelte';
-	let location = 'test2';
-	let orientatie = 'a';
 	let landscape = false;
-	let times,
-		myLat,
+	let myLat,
 		myLong,
 		angle,
 		dist,
 		speed = 0;
-	let destLat = 51.9795;
-	let destLong = 5.9257;
+	let destLat = 51.156792571149666;
+	let destLong = 5.85393332261703;
 
 	getLocation();
-	setInterval(() => getLocation(), 10000);
+	setInterval(() => getLocation(), 5000);
 	if (typeof screen !== 'undefined') {
 		screen.orientation.onchange = () => {
 			screen.orientation.type.substring(0, 1) == 'l' ? (landscape = true) : (landscape = false);
-			orientatie = screen.orientation.type;
 		};
 	}
 	function getLocation() {
-		times++;
-		// console.log(times);
+		let currentDate = new Date();
+		let time = currentDate.getHours();
+		if (time >= 14) {
+			destLat = 50.36086272435071;
+			destLong = 5.579208970781638;
+		}
 		if (typeof window !== 'undefined') {
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(showPosition),
@@ -30,9 +30,9 @@
 						console.log(err);
 						alert('fetching the position failed');
 					},
-					{ enableHighAccuracy: false, timeout: 20000, maximumAge: 0 };
+					{ enableHighAccuracy: false, timeout: 10000, maximumAge: 0 };
 			} else {
-				location = 'Geolocation is not supported by this browser.';
+				console.log('Geolocation is not supported by this browser.');
 			}
 		}
 	}
@@ -80,7 +80,7 @@
 	}
 	@font-face {
 		font-family: redFont;
-		src: url(bullet-regular.ttf);
+		src: url(./bullet-regular.ttf);
 	}
 	.red {
 		margin: 0;
